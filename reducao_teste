@@ -1,0 +1,51 @@
+from PIL import Image
+
+image_path = r"C:\Users\User\Documents\GitHub\reducao_dimensionalidade\Boris.jpg"
+
+image = Image.open(image_path)
+image.show()
+
+# Convertendo para escala de cinza
+gray_image = image.convert("L")  # "L" significa luminância (tons de cinza)
+
+# Exibindo a imagem em escala de cinza
+gray_image.show()
+
+# Salvando a nova imagem
+gray_image.save(r"C:\Users\User\Documents\GitHub\reducao_dimensionalidade\Boris_gray.jpg")
+
+## ara binarizar uma imagem em escala de cinza, o processo envolve a aplicação de um limiar (threshold). 
+## Pixels com intensidade acima do limiar serão definidos como brancos (255), e os abaixo serão definidos como pretos (0). 
+## Isso destaca contornos e áreas de alto contraste.
+
+threshold = 160  # Valor do limiar (pode ser ajustado)
+binary_image = gray_image.point(lambda p: 255 if p > threshold else 0, '1') #image.point aplica uma função a cada pixel da imagem.
+
+#    A função lambda lambda p: 255 if p > threshold else 0 define os valores binarizados:
+        # 255 (branco) para pixels acima do limiar.
+        # 0 (preto) para pixels abaixo ou iguais ao limiar.
+		# '1' no point: define o modo como binário (1 bit por pixel), ideal para contornos.
+
+# Exibindo a imagem binarizada
+binary_image.show()
+
+# Salvando a imagem binarizada
+binary_image.save(r"C:\Users\User\Documents\GitHub\reducao_dimensionalidade\Boris_binary.jpg")
+
+
+# o threshold de 160 não destacou muito bem os contornos. vou tentar outro limiar
+
+threshold2 = 140  # Valor do limiar (pode ser ajustado)
+binary_image2 = gray_image.point(lambda p: 255 if p > threshold else 0, '1') #image.point aplica uma função a cada pixel da imagem.
+
+#    A função lambda lambda p: 255 if p > threshold else 0 define os valores binarizados:
+        # 255 (branco) para pixels acima do limiar.
+        # 0 (preto) para pixels abaixo ou iguais ao limiar.
+		# '1' no point: define o modo como binário (1 bit por pixel), ideal para contornos.
+
+# Exibindo a imagem binarizada
+binary_image2.show()
+
+# Salvando a imagem binarizada
+binary_image2.save(r"C:\Users\User\Documents\GitHub\reducao_dimensionalidade\Boris_binary2.jpg") 
+### não fez muita diferença, usar a primeira imagem binarizada: Boris_binary.jpg
